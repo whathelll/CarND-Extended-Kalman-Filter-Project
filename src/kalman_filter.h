@@ -64,6 +64,19 @@ public:
    */
   void UpdateEKF(const Eigen::VectorXd &z);
 
+  /**
+   * Set the time difference for the F matrix
+   * @param dt the time difference in seconds
+   */
+  void SetF(float dt);
+
+  /**
+   * Set the process covariance matrix
+   * @param dt the time difference in seconds
+   * @param noise_ax acceleration noise x
+   * @param noise_ay acceleration noise y
+   */
+  void SetQ(float dt, float noise_ax, float noise_ay);
 };
 
 #endif /* KALMAN_FILTER_H_ */

@@ -67,6 +67,9 @@ int main()
     	  iss >> sensor_type;
 
     	  if (sensor_type.compare("L") == 0) {
+//              std::string msg = "42[\"manual\",{}]";
+//              ws.send(msg.data(), msg.length(), uWS::OpCode::TEXT);
+//        	  	return;
       	  		meas_package.sensor_type_ = MeasurementPackage::LASER;
           		meas_package.raw_measurements_ = VectorXd(2);
           		float px;
@@ -77,7 +80,6 @@ int main()
           		iss >> timestamp;
           		meas_package.timestamp_ = timestamp;
           } else if (sensor_type.compare("R") == 0) {
-
       	  		meas_package.sensor_type_ = MeasurementPackage::RADAR;
           		meas_package.raw_measurements_ = VectorXd(3);
           		float ro;
@@ -90,6 +92,9 @@ int main()
           		iss >> timestamp;
           		meas_package.timestamp_ = timestamp;
           }
+
+    	  std::cout << "========================sensor type:" << sensor_type << std::endl;
+
           float x_gt;
     	  float y_gt;
     	  float vx_gt;
@@ -106,6 +111,10 @@ int main()
     	  ground_truth.push_back(gt_values);
           
           //Call ProcessMeasurment(meas_package) for Kalman filter
+    	  std::cout << "Ground Truth = " << gt_values << std::endl;
+    	  std::cout << "Measurement " << meas_package.sensor_type_ << " = " << meas_package.raw_measurements_ << std::endl;
+    	  std::cout << "Time = " << meas_package.timestamp_ << std::endl;
+    	  std::cout << "calling process measurements" << std::endl;
     	  fusionEKF.ProcessMeasurement(meas_package);    	  
 
     	  //Push the current estimated x,y positon from the Kalman filter's state vector

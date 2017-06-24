@@ -10,8 +10,11 @@ include_directories(${PROJECT_SOURCE_DIR}/src)
 
 
 
-set(counter_SOURCES RunAllTests.cpp other_test.cpp test_kalman_filter.cpp test_tools.cpp ../src/tools.cpp)
-add_executable(RunAllTests ${counter_SOURCES})
+set(test_SOURCES RunAllTests.cpp 
+	test_FusionEKF.cpp ../src/FusionEKF.cpp 
+	test_kalman_filter.cpp ../src/kalman_filter.cpp 
+	test_tools.cpp ../src/tools.cpp)
+add_executable(RunAllTests ${test_SOURCES})
 target_link_libraries(RunAllTests gtest_main)
 
 add_test(NAME RunAllTests COMMAND RunAllTests)
