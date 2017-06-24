@@ -65,7 +65,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 
 	VectorXd Hx(3);
 	Hx << rho, phi, rho_dot;
-	std::cout << "Hx: " << Hx << std::endl;
+//	std::cout << "Hx: " << Hx << std::endl;
 
 	VectorXd y = z - Hx;
 	//seems radar measurements come in both 3.19 (higher than pi) and -3.1 so we have to fix y
@@ -73,7 +73,7 @@ void KalmanFilter::UpdateEKF(const VectorXd &z) {
 		y(1) = remainder(y(1), 2*M_PI);
 	}
 
-	std::cout << "---y: " << y << std::endl;
+//	std::cout << "---y: " << y << std::endl;
 
 	MatrixXd HTrans = H_.transpose();
 	MatrixXd S = H_ * P_ * HTrans + R_;
